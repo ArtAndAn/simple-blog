@@ -22,14 +22,6 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=250, unique=True, editable=False)
 
-    def short_article(self):
-        return {'title': self.title,
-                'category': str(self.category).title(),
-                'author': str(self.author).title(),
-                'created': self.created.strftime('%Y-%m-%d %H:%M'),
-                'text': self.text,
-                'slug': self.slug}
-
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = '-'.join(re.split('[\b\W]+', self.title.lower()))

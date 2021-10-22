@@ -3,7 +3,7 @@ from random import randint
 
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Article, Category
 from .serializers import ArticleFullSerializer
@@ -12,9 +12,14 @@ from .serializers import ArticleFullSerializer
 class AllArticles(ListAPIView):
     """View for showing all articles data (only GET method)"""
     queryset = Article.objects.all()
+    serializer_class = ArticleFullSerializer
 
-    def get_serializer_class(self):
-        return ArticleFullSerializer
+
+class SingleArticle(RetrieveAPIView):
+    """View for showing single article data (only GET method)"""
+    queryset = Article.objects.all()
+    serializer_class = ArticleFullSerializer
+    lookup_field = 'slug'
 
 
 def data_check(request):
