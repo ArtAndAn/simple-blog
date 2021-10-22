@@ -10,9 +10,24 @@ from .serializers import ArticleFullSerializer
 
 
 class AllArticles(ListAPIView):
-    """View for showing all articles data (only GET method)"""
+    """View for showing filtered by category or author articles, or all articles if no filter was specified
+     (only GET method)"""
     queryset = Article.objects.all()
     serializer_class = ArticleFullSerializer
+
+    def get_queryset(self):
+        if self.kwargs:
+            for key, value in self.kwargs.items():
+                if key == 'category':
+                    category = Category.objects.get(name=value)
+                    articles = Article.objects.filter(category=category)
+                    return articles
+                elif key == 'author':
+                    author = User.objects.get(username=value)
+                    articles = Article.objects.filter(author=author)
+                    return articles
+        else:
+            return super().get_queryset()
 
 
 class SingleArticle(RetrieveAPIView):
