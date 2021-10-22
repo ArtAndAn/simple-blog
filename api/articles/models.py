@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -27,6 +29,15 @@ class Article(models.Model):
                 'created': self.created.strftime('%Y-%m-%d %H:%M'),
                 'text': self.text,
                 'slug': self.slug}
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug = '-'.join(re.split('[\b\W]+', self.title.lower()))
+            if Article.objects.filter(slug=slug).exists():
+                articles_count = Article.objects.filter(title=self.title).count()
+                slug = f'{slug}-{articles_count}'
+            self.slug = slug
+        super(Article, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

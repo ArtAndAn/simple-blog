@@ -5,5 +5,6 @@ app_name = 'api'
 
 urlpatterns = [
     path('', views.AllArticles.as_view(), name='all_articles'),
-    path('check', views.data_check, name='data_check')
+    path('check/', views.data_check, name='data_check'),
+    path('yes/', views.data_check, name='yes')
 ]
