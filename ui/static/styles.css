@@ -1,0 +1,46 @@
+body {
+    justify-content: center;
+    text-align: center;
+    background: #F4F7FD;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header-text {
+    font-size: 35px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    margin: 5rem auto;
+    width: 85%;
+    grid-gap: 3%;
+}
+
+.card {
+    border: 1px solid #e6e4e9;
+    border-radius: 8px;
+}
+
+.card-header {
+    font-size: 1.75rem;
+}
+
+.card-content {
+    padding: 5%;
+    text-align: left;
+}
+
+.card-text {
+    text-align: justify;
+    margin-bottom: 5%;
+    font-weight: 600;
+}

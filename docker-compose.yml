@@ -1,0 +1,53 @@
+networks:
+  blog_network:
+    driver: bridge
+    name: blog
+
+services:
+  postgres:
+    image: postgres
+    networks:
+      - blog_network
+    ports:
+      - 5432:5432
+    env_file:
+      - ./conf/db/db.env
+  api:
+    image: homework22api
+    command: >
+      sh -c "python3 manage.py collectstatic --noinput &&
+             python3 manage.py migrate &&
+             python3 manage.py runserver 0.0.0.0:8000"
+    networks:
+      - blog_network
+    ports:
+      - 8000:8000
+    env_file:
+      - ./conf/db/api-ui.env
+    depends_on:
+      - postgres
+    restart: on-failure
+  ui:
+    image: homework22ui
+    command: >
+      sh -c "python3 manage.py runserver 0.0.0.0:7000"
+    networks:
+      - blog_network
+    ports:
+      - 7000:7000
+    env_file:
+      - ./conf/db/api-ui.env
+    depends_on:
+      - api
+  nginx:
+    image: nginx
+    networks:
+      - blog_network
+    ports:
+      - 80:9000
+    depends_on:
+      - api
+      - ui
+    volumes:
+      - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./api/static/rest_framework:/opt/api/static/rest_framework

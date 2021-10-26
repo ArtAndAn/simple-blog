@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %} All articles {% endblock %}
+
+{% block header_title %} All articles {% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <a href="">Motoball. A Big Ball Near the Fortress</a>
+        </div>
+        <div class="card-content">
+            <p class="card-text b3">A motoball match is played on a football field with slightly different marks: the
+                field doesn’t have a
+                central circle, and the goalpost area has a semi-circle shape. Asphalt and gravel are usually used as a
+                field cover.</p>
+            <p>Category: <a href="">Investigations</a></p>
+            <p>Author: <a href="">fireworkbeloved</a></p>
+            <p>Created: 10.13.2021 15:17</p>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a href="">Motoball. A Big Ball Near the Fortress</a>
+        </div>
+        <div class="card-content">
+            <p class="card-text b3">A motoball match is played on a football field with slightly different marks: the
+                field doesn’t have a
+                central circle, and the goalpost area has a semi-circle shape. Asphalt and gravel are usually used as a
+                field cover.</p>
+            <p>Category: <a href="">Investigations</a></p>
+            <p>Author: <a href="">fireworkbeloved</a></p>
+            <p>Created: 10.13.2021 15:17</p>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a href="">Motoball. A Big Ball Near the Fortress</a>
+        </div>
+        <div class="card-content">
+            <p class="card-text b3">A motoball match is played on a football field with slightly different marks: the
+                field doesn’t have a
+                central circle, and the goalpost area has a semi-circle shape. Asphalt and gravel are usually used as a
+                field cover.</p>
+            <p>Category: <a href="">Investigations</a></p>
+            <p>Author: <a href="">fireworkbeloved</a></p>
+            <p>Created: 10.13.2021 15:17</p>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a href="">Motoball. A Big Ball Near the Fortress</a>
+        </div>
+        <div class="card-content">
+            <p class="card-text b3">A motoball match is played on a football field with slightly different marks: the
+                field doesn’t have a
+                central circle, and the goalpost area has a semi-circle shape. Asphalt and gravel are usually used as a
+                field cover.</p>
+            <p>Category: <a href="">Investigations</a></p>
+            <p>Author: <a href="">fireworkbeloved</a></p>
+            <p>Created: 10.13.2021 15:17</p>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a href="">Motoball. A Big Ball Near the Fortress</a>
+        </div>
+        <div class="card-content">
+            <p class="card-text b3">A motoball match is played on a football field with slightly different marks: the
+                field doesn’t have a
+                central circle, and the goalpost area has a semi-circle shape. Asphalt and gravel are usually used as a
+                field cover.</p>
+            <p>Category: <a href="">Investigations</a></p>
+            <p>Author: <a href="">fireworkbeloved</a></p>
+            <p>Created: 10.13.2021 15:17</p>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a href="">Motoball. A Big Ball Near the Fortress</a>
+        </div>
+        <div class="card-content">
+            <p class="card-text b3">A motoball match is played on a football field with slightly different marks: the
+                field doesn’t have a
+                central circle, and the goalpost area has a semi-circle shape. Asphalt and gravel are usually used as a
+                field cover.</p>
+            <p>Category: <a href="">Investigations</a></p>
+            <p>Author: <a href="">fireworkbeloved</a></p>
+            <p>Created: 10.13.2021 15:17</p>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a href="">Motoball. A Big Ball Near the Fortress</a>
+        </div>
+        <div class="card-content">
+            <p class="card-text b3">A motoball match is played on a football field with slightly different marks: the
+                field doesn’t have a
+                central circle, and the goalpost area has a semi-circle shape. Asphalt and gravel are usually used as a
+                field cover.</p>
+            <p>Category: <a href="">Investigations</a></p>
+            <p>Author: <a href="">fireworkbeloved</a></p>
+            <p>Created: 10.13.2021 15:17</p>
+        </div>
+
+    </div>
+</div>
+<script>
+    const articlesURL = 'api';
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', articlesURL);
+    xhr.send();
+    xhr.onload = () => {
+        let articles = xhr.response
+        let parsed_art = JSON.parse(articles)
+        console.log(parsed_art)
+    }
+</script>
+{% endblock %}
