@@ -1,5 +1,4 @@
 import random
-from random import randint
 
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
