@@ -112,4 +112,4 @@ def data_check(request):
                 author=random.choice(users),
                 category=random.choice(categories)
                 ).save()
-    return redirect('api:all_articles')
+    return redirect('all_articles')
