@@ -5,7 +5,7 @@ RUN apt update
 RUN apt install --yes python pip
 
 # setting working directory
-WORKDIR /opt/api
+WORKDIR /opt/ui
 
 # requirements file copying and all dependencies installation
 COPY requirements.txt ./

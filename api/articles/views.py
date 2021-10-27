@@ -18,7 +18,7 @@ class AllArticles(ListAPIView):
         if self.kwargs:
             for key, value in self.kwargs.items():
                 if key == 'category':
-                    category = Category.objects.get(name=value)
+                    category = Category.objects.get(name=value.title())
                     articles = Article.objects.filter(category=category)
                     return articles
                 elif key == 'author':
@@ -109,7 +109,7 @@ def data_check(request):
                      'Keep up with the training.” As for now I work as a minibus driver in Kamianets. So, I got off the'
                      ' route and had training, and now I’m going back to the route. For the last seven to eight years I'
                      ' have tried every job.',
-                author=random.choice(users),
-                category=random.choice(categories)
+                author=random.choice(User.objects.all()),
+                category=random.choice(Category.objects.all())
                 ).save()
     return redirect('all_articles')
