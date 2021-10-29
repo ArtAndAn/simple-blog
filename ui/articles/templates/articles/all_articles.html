@@ -14,10 +14,18 @@
     xhr.send();
     xhr.onload = () => {
         let parsed_articles = JSON.parse(xhr.response);
+
+        if (parsed_articles <= 0) {
+            let message = document.createElement('h2')
+            message.innerHTML = 'Looks like there are no articles yet! :('
+            document.body.append(message)
+        }
+
         let content_div = document.getElementById('content-many');
         for (let article of parsed_articles) {
             {% include 'create_card.js' with content_div=content_div article=article %}
         }
+
         if ('{{ content }}' != 'All') {
             let home_page_link = document.createElement('a');
             home_page_link.className = 'main-page-link';

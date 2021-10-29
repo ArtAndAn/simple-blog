@@ -16,4 +16,5 @@ def single_article(request, slug):
 
 
 def check(request):
-    return
+    return render(request, 'articles/check.html', context={'url': '/api/check'})
+
