@@ -112,4 +112,15 @@ def data_check(request):
                 author=random.choice(User.objects.all()),
                 category=random.choice(Category.objects.all())
                 ).save()
+        Article(title='PIPIPIPIPIPIPIPSIDAPIASPDAS. A Big Ball Near the Fortress',
+                text='Motoball is an exclusively European sport originating from France, which has gained enormous '
+                     'popularity in Ukraine during Soviet Union times. Motoball tournaments and several motoball teams '
+                     'have survived until today only on enthusiasm of players, coaches, and few spectasually used as a '
+                     'mprove motorcycle maneuverability, the asphalt is lightly '
+                     'sprinkled with sand. The ball used for the sport is several times bigger than a football. Each '
+                     'team has five players including a goalkeeper, and all players, with not exception, are on '
+                     'motoball team and the fortress. Many ',
+                author=random.choice(User.objects.all()),
+                category=random.choice(Category.objects.all())
+                ).save()
     return redirect('all_articles')

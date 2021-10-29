@@ -3,13 +3,17 @@ from django.shortcuts import render
 
 def all_articles(request, topic=None, author=None):
     if topic:
-        context = {'filter': topic}
+        context = {'api_link': f'/api/category/{topic}', 'content': topic}
     elif author:
-        context = {'filter': author}
+        context = {'api_link': f'/api/user/{author}', 'content': author}
     else:
-        context = {'filter': 'All'}
+        context = {'api_link': '/api/', 'content': 'All'}
     return render(request, 'articles/all_articles.html', context=context)
 
 
-def single_article(request):
-    return render(request, 'articles/single_article.html')
+def single_article(request, slug):
+    return render(request, 'articles/single_article.html', context={'url': f'article/{slug}'})
+
+
+def check(request):
+    return

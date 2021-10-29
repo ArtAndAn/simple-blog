@@ -10,3 +10,5 @@
         "slug": "motoball-a-big-ball-near-the-fortress"
     }
 ]
+
+    const articlesURL = 'api/' + {{ filter }} + '/' + {{ param }};

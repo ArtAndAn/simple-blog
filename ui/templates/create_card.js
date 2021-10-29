@@ -22,8 +22,8 @@ let card_topic = document.createElement('p');
 card_topic.innerHTML = 'Topic: ';
 
 let card_topic_link = document.createElement('a');
-card_topic_link.innerHTML = article.topic;
-card_topic_link.href = '/topic/' + article.topic;
+card_topic_link.innerHTML = article.category;
+card_topic_link.href = '/topic/' + article.category;
 
 card_topic.append(card_topic_link);
 card_content.append(card_topic);
@@ -46,4 +46,4 @@ card_date.innerHTML = 'Created: ' + date.toLocaleDateString('en-GB', options);
 card_content.append(card_date);
 card.append(card_content);
 
-content.append(card)
+content_div.append(card)

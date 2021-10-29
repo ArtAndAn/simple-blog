@@ -26,7 +26,7 @@ a {
 }
 
 .card-content {
-    padding: 5%;
+    padding: 5% 5% 0 5%;
     text-align: left;
 }
 
@@ -36,11 +36,27 @@ a {
     font-weight: 600;
 }
 
-#content {
+.main-page-link {
+    color: #0dcaf0;
+    display: inline-block;
+    margin: 2% 0;
+    border: 1px solid #0dcaf0;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    background-color: white;
+}
+
+#content-many {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     margin: 5rem auto;
     width: 85%;
     grid-gap: 3%;
+}
+
+#content-single {
+    display: block;
+    margin: 5rem auto;
+    width: 85%;
 }

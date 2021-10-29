@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} Article {% endblock %}
+
+{% block header_title %} Article {% endblock %}
+
+{% block content %}
+<div id="content-single">
+    <div class="card">
+        <div class="card-header">
+            <a id="card-header-link" href="/article/motoball-a-big-ball-near-the-fortress"></a>
+        </div>
+        <div class="card-content">
+            <p id="card-text" class="card-text b3"></p>
+            <p>Topic: <a id="card-topic-link" href=""></a></p>
+            <p>Author: <a id="card-author-link" href=""></a></p>
+            <p id="card-created"></p>
+            <a class="main-page-link" href="/">Back to all articles</a>
+        </div>
+    </div>
+</div>
+<script>
+    const articlesURL = '/api/{{ url }}';
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', articlesURL);
+    xhr.send();
+    xhr.onload = () => {
+        let article = JSON.parse(xhr.response);
+        let card_header_link = document.getElementById('card-header-link');
+        card_header_link.innerHTML = article.title;
+        card_header_link.href = '/article/' + article.slug;
+
+        let card_text = document.getElementById('card-text');
+        card_text.innerHTML = article.text;
+
+        let card_author_link = document.getElementById('card-author-link');
+        card_author_link.innerHTML = article.author;
+        card_author_link.href = '/author/' + article.author;
+
+        let card_topic_link = document.getElementById('card-topic-link');
+        card_topic_link.innerHTML = article.topic;
+        card_topic_link.href = '/topic/' + article.topic;
+
+        let card_created = document.getElementById('card-created');
+        let date = new Date(article.created);
+        let options = {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
+        card_created.innerHTML = 'Created: ' + date.toLocaleDateString('en-GB', options);
+    }
+</script>
+{% endblock %}
