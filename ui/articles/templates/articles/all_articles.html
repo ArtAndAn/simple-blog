@@ -7,8 +7,15 @@
 {% block content %}
 <div id="content-many"></div>
 <script>
-    const articlesURL = '{{ api_link }}';
+    window.onerror = () => {
+        let error_message = document.createElement('h5');
+        error_message.className = 'alert alert-danger d-inline';
+        error_message.innerHTML = 'We got some error during loading of this page. ' +
+            'Try again later or check out other pages!';
+        document.body.append(error_message);
+    }
 
+    const articlesURL = '{{ api_link }}';
     const xhr = new XMLHttpRequest();
     xhr.open('GET', articlesURL);
     xhr.send();
