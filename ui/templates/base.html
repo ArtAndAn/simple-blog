@@ -12,7 +12,18 @@
 <header class="p-2 bg-dark text-white">
     <p class="header-text">{% block header_title %}{% endblock %}</p>
 </header>
-{% block content %}
-{% endblock %}
+{% block content %}{% endblock %}
+<script>
+    function db_error_message() {
+        window.onerror = () => {
+            let error_message = document.createElement('h5');
+            error_message.className = 'alert alert-danger d-inline';
+            error_message.innerHTML = 'We got some error during loading of this page. ' +
+                'Try again later or check out other pages!';
+            document.body.append(error_message);
+        }
+    }
+    db_error_message()
+</script>
 </body>
 </html>

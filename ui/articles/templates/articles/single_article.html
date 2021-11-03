@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'articles/articles_base.html' %}
 
 {% block title %} Article {% endblock %}
 
@@ -19,40 +19,11 @@
         </div>
     </div>
 </div>
+
+{{ block.super }}
 <script>
-    window.onerror = () => {
-        let error_message = document.createElement('h5');
-        error_message.className = 'alert alert-danger d-inline';
-        error_message.innerHTML = 'We got some error during loading of this page. ' +
-            'Try again later or check out other pages!';
-        document.body.append(error_message);
-    }
+    const articleURL = '{{ api_link }}';
 
-    const articlesURL = '/api/{{ url }}';
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', articlesURL);
-    xhr.send();
-    xhr.onload = () => {
-        let article = JSON.parse(xhr.response);
-        let card_header_link = document.getElementById('card-header-link');
-        card_header_link.innerHTML = article.title;
-        card_header_link.href = '/article/' + article.slug;
-
-        let card_text = document.getElementById('card-text');
-        card_text.innerHTML = article.text;
-
-        let card_author_link = document.getElementById('card-author-link');
-        card_author_link.innerHTML = article.author;
-        card_author_link.href = '/author/' + article.author;
-
-        let card_topic_link = document.getElementById('card-topic-link');
-        card_topic_link.innerHTML = article.topic;
-        card_topic_link.href = '/topic/' + article.topic;
-
-        let card_created = document.getElementById('card-created');
-        let date = new Date(article.created);
-        let options = {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
-        card_created.innerHTML = 'Created: ' + date.toLocaleDateString('en-GB', options);
-    }
+    add_content(articleURL)
 </script>
 {% endblock %}

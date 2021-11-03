@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+{% block header_title %}{% endblock %}
+
+{% block content %}
+<script>
+    function add_card(content_div, article) {
+        let card = document.createElement('div');
+        card.className = 'card'
+
+        let header = document.createElement('div');
+        header.className = 'card-header';
+
+        let header_link = document.createElement('a')
+        header_link.innerHTML = article.title;
+        header_link.href = '/article/' + article.slug;
+        header.append(header_link);
+        card.append(header);
+
+        let card_content = document.createElement('div');
+        card_content.className = 'card-content';
+
+        let card_text = document.createElement('p');
+        card_text.className = 'card-text b3';
+        card_text.innerHTML = article.text.substr(0, 50) + '...';
+        card_content.append(card_text);
+
+        let card_topic = document.createElement('p');
+        card_topic.innerHTML = 'Topic: ';
+
+        let card_topic_link = document.createElement('a');
+        card_topic_link.innerHTML = article.category;
+        card_topic_link.href = '/topic/' + article.category;
+
+        card_topic.append(card_topic_link);
+        card_content.append(card_topic);
+
+        let card_author = document.createElement('p');
+        card_author.innerHTML = 'Author: ';
+
+        let card_author_link = document.createElement('a');
+        card_author_link.innerHTML = article.author;
+        card_author_link.href = '/user/' + article.author;
+
+        card_author.append(card_author_link);
+        card_content.append(card_author);
+
+        let card_date = document.createElement('p');
+        let date = new Date(article.created)
+        let options = {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'}
+        card_date.innerHTML = 'Created: ' + date.toLocaleDateString('en-GB', options);
+
+        card_content.append(card_date);
+        card.append(card_content);
+
+        content_div.append(card)
+    }
+
+    function add_single_article(article) {
+        let card_header_link = document.getElementById('card-header-link');
+        card_header_link.innerHTML = article.title;
+        card_header_link.href = '/article/' + article.slug;
+
+        let card_text = document.getElementById('card-text');
+        card_text.innerHTML = article.text;
+
+        let card_author_link = document.getElementById('card-author-link');
+        card_author_link.innerHTML = article.author;
+        card_author_link.href = '/author/' + article.author;
+
+        let card_topic_link = document.getElementById('card-topic-link');
+        card_topic_link.innerHTML = article.topic;
+        card_topic_link.href = '/topic/' + article.topic;
+
+        let card_created_date = document.getElementById('card-created');
+        let date = new Date(article.created);
+        let options = {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
+        card_created_date.innerHTML = 'Created: ' + date.toLocaleDateString('en-GB', options);
+    }
+
+    function add_content(api_url, content_div = null) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', api_url);
+        xhr.send();
+        xhr.onload = () => {
+            let parsed_articles = JSON.parse(xhr.response);
+
+            if (parsed_articles <= 0) {
+                let message = document.createElement('h2')
+                message.innerHTML = 'Looks like there are no articles yet! :('
+                document.body.append(message)
+            }
+
+            if (!content_div) {
+                add_single_article(parsed_articles)
+            } else {
+                for (let article of parsed_articles) {
+                    add_card(content_div, article)
+                }
+            }
+        }
+    }
+
+    function show_homepage_link(content_div) {
+        let home_page_link = document.createElement('a');
+        home_page_link.className = 'main-page-link';
+        home_page_link.href = '/';
+        home_page_link.innerHTML = 'Back to all articles';
+
+        content_div.after(home_page_link)
+    }
+</script>
+{% endblock %}
+
+
