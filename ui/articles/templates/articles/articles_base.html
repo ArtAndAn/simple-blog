@@ -70,8 +70,8 @@
         card_author_link.href = '/author/' + article.author;
 
         let card_topic_link = document.getElementById('card-topic-link');
-        card_topic_link.innerHTML = article.topic;
-        card_topic_link.href = '/topic/' + article.topic;
+        card_topic_link.innerHTML = article.category;
+        card_topic_link.href = '/topic/' + article.category;
 
         let card_created_date = document.getElementById('card-created');
         let date = new Date(article.created);
@@ -89,7 +89,7 @@
             if (parsed_articles <= 0) {
                 let message = document.createElement('h2')
                 message.innerHTML = 'Looks like there are no articles yet! :('
-                document.body.append(message)
+                content_div.after(message);
             }
 
             if (!content_div) {

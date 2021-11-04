@@ -16,13 +16,18 @@
 <script>
     function db_error_message() {
         window.onerror = () => {
+            let error_div = document.createElement('div')
+            error_div.className = 'm-5'
             let error_message = document.createElement('h5');
             error_message.className = 'alert alert-danger d-inline';
             error_message.innerHTML = 'We got some error during loading of this page. ' +
                 'Try again later or check out other pages!';
-            document.body.append(error_message);
+            error_div.append(error_message);
+            let page_header = document.getElementsByTagName('header')[0];
+            page_header.after(error_div);
         }
     }
+
     db_error_message()
 </script>
 </body>
