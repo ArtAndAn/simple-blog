@@ -5,25 +5,15 @@
 {% block header_title %} Article {% endblock %}
 
 {% block content %}
-<div id="content-single">
-    <div class="card">
-        <div class="card-header">
-            <a id="card-header-link" href="/article/motoball-a-big-ball-near-the-fortress"></a>
-        </div>
-        <div class="card-content">
-            <p id="card-text" class="card-text b3"></p>
-            <p>Topic: <a id="card-topic-link" href=""></a></p>
-            <p>Author: <a id="card-author-link" href=""></a></p>
-            <p id="card-created"></p>
-            <a class="main-page-link" href="/">Back to all articles</a>
-        </div>
-    </div>
-</div>
+<div id="content-single"></div>
 
 {{ block.super }}
 <script>
     const articleURL = '{{ api_link }}';
+    let content_div = document.getElementById('content-single');
 
-    add_content(articleURL)
+    add_content(articleURL, content_div)
+
+    show_homepage_link(content_div)
 </script>
 {% endblock %}

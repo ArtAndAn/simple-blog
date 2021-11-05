@@ -57,46 +57,74 @@
         content_div.append(card)
     }
 
-    function add_single_article(article) {
-        let card_header_link = document.getElementById('card-header-link');
-        card_header_link.innerHTML = article.title;
-        card_header_link.href = '/article/' + article.slug;
+    function add_single_article(content_div, article) {
+        let card_div = document.createElement('div')
+        card_div.className = 'card'
 
-        let card_text = document.getElementById('card-text');
-        card_text.innerHTML = article.text;
+        let card_header_div = document.createElement('div')
+        card_header_div.className = 'card-header'
 
-        let card_author_link = document.getElementById('card-author-link');
-        card_author_link.innerHTML = article.author;
-        card_author_link.href = '/author/' + article.author;
+        let card_header_link = document.createElement('a')
+        card_header_link.href = '/article/' + article.slug
+        card_header_link.innerHTML = article.title
 
-        let card_topic_link = document.getElementById('card-topic-link');
-        card_topic_link.innerHTML = article.category;
-        card_topic_link.href = '/topic/' + article.category;
+        let card_content_div = document.createElement('div')
+        card_content_div.className = 'card-content'
 
-        let card_created_date = document.getElementById('card-created');
+        let card_text = document.createElement('p')
+        card_text.className = 'card-text b3'
+        card_text.innerHTML = article.text
+
+        let card_topic = document.createElement('p')
+        card_topic.innerHTML = 'Category: '
+        let card_topic_link = document.createElement('a')
+        card_topic_link.href = '/topic/' + article.category
+        card_topic_link.innerHTML = article.category
+        card_topic.append(card_topic_link)
+
+        let card_author = document.createElement('p')
+        card_author.innerHTML = 'Author: '
+        let card_author_link = document.createElement('a')
+        card_author_link.href = '/topic/' + article.author
+        card_author_link.innerHTML = article.author
+        card_author.append(card_author_link)
+
+        let card_created_date = document.createElement('p')
         let date = new Date(article.created);
         let options = {day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
         card_created_date.innerHTML = 'Created: ' + date.toLocaleDateString('en-GB', options);
+
+        card_header_div.append(card_header_link)
+
+        card_content_div.append(card_text)
+        card_content_div.append(card_topic)
+        card_content_div.append(card_author)
+        card_content_div.append(card_created_date)
+
+        card_div.append(card_header_div)
+        card_div.append(card_content_div)
+
+        content_div.append(card_div)
     }
 
-    function add_content(api_url, content_div = null) {
+    function add_content(api_url, content_div) {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', api_url);
         xhr.send();
         xhr.onload = () => {
             let parsed_articles = JSON.parse(xhr.response);
 
-            if (parsed_articles <= 0) {
+            if (parsed_articles <= 0 || parsed_articles.detail === 'Not found.') {
                 let message = document.createElement('h2')
                 message.innerHTML = 'Looks like there are no articles yet! :('
                 content_div.after(message);
-            }
-
-            if (!content_div) {
-                add_single_article(parsed_articles)
             } else {
-                for (let article of parsed_articles) {
-                    add_card(content_div, article)
+                if (content_div.id === 'content-single') {
+                    add_single_article(content_div, parsed_articles)
+                } else {
+                    for (let article of parsed_articles) {
+                        add_card(content_div, article)
+                    }
                 }
             }
         }
